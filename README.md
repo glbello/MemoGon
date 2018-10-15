@@ -1,7 +1,7 @@
 # MemoGon
 Programa para practicar la memoria, se evalua más adelantes que otros usos se le puede dar al programa.
 
-### Ejemplo de pickle:
+### Serializar objetos **Pickle**
 
 Conversión del diccionario `data` al archivo `data.pickle`
 ```python

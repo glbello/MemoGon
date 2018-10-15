@@ -1,7 +1,6 @@
 from definicion_item import Item
 from random import choice, shuffle
-import jsonReader
-
+import pickle
 
 class Sistema:
     def __init__(self):
@@ -9,7 +8,8 @@ class Sistema:
         self.n = 3
 
     def cargar_datos(self, path):
-        self.banco_itemes = jsonReader.jsonToDict(path)
+    	with open('data.pickle', 'rb') as f:
+    		self.banco_itemes = pickle.load(f)
 
     def iniciar_sistema(self):
         shuffle(self.banco_itemes)

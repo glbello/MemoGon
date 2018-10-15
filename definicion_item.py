@@ -4,15 +4,21 @@ import datetime
 class Item:
     _id = 0
 
-    def __init__(self, iden_a="", iden_b=""):
+    def __init__(self):
         self.id = Item._id
         Item._id += 1
 
-        self.iden_a = iden_a
-        self.iden_b = iden_b
+        self.iden_a = ""
+        self.iden_b = ""
         self.fecha_creacion = datetime.datetime.now()  # fecha actual de creacion
         self.veces_mostradas = 0
         self.veces_acertadas = 0
+
+    def dar_iden_a(self, iden_a):
+        self.iden_a = iden_a
+
+    def dar_iden_b(self, iden_b):
+        self.iden_b = iden_b
 
     def mostrar(self):
         print(self.iden_a)

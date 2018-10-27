@@ -37,3 +37,20 @@ class Item:
     def resetear(self):
         self.veces_mostradas = 0
         self.veces_acertadas = 0
+
+    def __repr__(self):
+        _repr = "iden_a: {}, iden_b: {}".format(self.iden_a, self.iden_b)
+        return _repr
+
+if __name__ == "__main__":
+    resp_user = input("n°: ")
+    while True:
+        if resp_user == "-1":
+            break
+        if resp_user.isdigit():
+            if int(resp_user) > 10:
+                break
+        else:
+            print("ERROR! vuelva a ingresarlo")
+            resp_user = input("n°: ")
+    print("Terminamos")

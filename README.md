@@ -25,6 +25,14 @@ with open('data.pickle', 'rb') as f:
     data = pickle.load(f)
 ```
 
+### Ver archivos de carpeta local
+
+```python
+from os import listdir
+
+lista_archivos = listdir()
+```
+
 ### Bibliografía
 
 [pickle](https://docs.python.org/3.4/library/pickle.html) - 12.1.8 Examples

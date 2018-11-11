@@ -6,11 +6,21 @@ import pickle
 class GestorItemes:
     def __init__(self):
         # Creacion variables
-        self.i = 1
         self.itemes = []
         self.iden_a = ""
         self.iden_b = ""
+        self._i = 0
 
+    @property
+    def i(self):
+        self._i = len(self.itemes)
+        return self._i
+
+    @i.setter
+    def i(self, value):
+        self._i = value
+        return self._i  
+    
     # Definicion funciones
     def msg_mensaje_inicial(self):
         _rep = " ---- Sistema para creación de archivo de itemes ----\n"
@@ -21,7 +31,16 @@ class GestorItemes:
         _rep += "2) Editar archivo\n"
         print(_rep)
         resp_user = input(">> ")
-        return int(resp_user)
+        while True:
+            try:
+                while True:
+                    resp_user = int(resp_user)
+                    if resp_user not in [1,2]:
+                        break
+                        print("Error, vuelva a ingresarlo")
+                return resp_user
+            except ValueError:
+                print("Error, vuelva a ingresarlo")
 
     def msg_indicaciones_usuario(self):
         _rep = "--> Si desea finalizar, escriba 'exit'\n"
@@ -37,12 +56,12 @@ class GestorItemes:
         _rep = "[\n"
         for i, it in zip(range(len(self.itemes)), self.itemes):
             _rep += "n° {}: {},\n".format(i, it)
-        _rep += "]"
+        _rep += "]\n"
         return _rep
 
     def msg_consulta_eliminar_item(self):
-        _rep = " Indique el n° item que desea eliminar\n"
-        _rep +=" Si desea salir escriba -1"
+        _rep = "Indique el n° item que desea eliminar\n"
+        _rep +="Si desea salir escriba -1"
         return _rep
 
     def crear_item(self, iden_a, iden_b):
@@ -66,7 +85,7 @@ class GestorItemes:
         return iden
 
     def msg_reseteando_item_actual(self):
-        _rep = "Reseteando item actual\n"
+        _rep = "item {} reseteado\n".format(self.i)
         _rep += "-"*20 + "\n" 
         return _rep
 
@@ -77,7 +96,6 @@ class GestorItemes:
 
     def generar_archivo(self, mode=0):
         if mode == 1:
-            self.i = len(self.itemes)
             print("Estos son los itemes que tiene en este archivo")
             print(self.mostrar_lista_itemes())
 
@@ -87,37 +105,39 @@ class GestorItemes:
             print(self.msg_inicio_creacion_item(self.i))
 
             self.iden_a = self.obtener_iden("a")
+            print()
             if self.iden_a == "exit":
                 break
             elif self.iden_a == "-1":
-                self.i -= 1
                 print(self.msg_reseteando_item_actual())
                 continue
             elif self.iden_a == "-2":
                 print(self.mostrar_lista_itemes())
                 print(self.msg_consulta_eliminar_item())
 
-                resp_user = input("n°: ")
+                resp_user = input(">> ")
                 while True:
                     if resp_user == "-1":
+                        print()
                         break
                     if resp_user.isdigit():
                         if int(resp_user) in range(len(self.itemes)):
                             self.itemes.pop(int(resp_user))
-                            self.i -= 1
-                        break
+                            print()
+                            break
+                        else:
+                            print("ERROR! vuelva a ingresarlo")
+                            resp_user = input(">> ")
                     else:
-                        print("ERROR! vuelva a ingresarlo")
-                        resp_user = input("n°: ")
+                        print("Error, vuelva a intentarlo")
                 continue
 
-            print()
 
             self.iden_b = self.obtener_iden("b")
+            print()
             if self.iden_b == "exit":
                 break
             elif self.iden_b == "-1":
-                self.i -= 1
                 print(self.msg_reseteando_item_actual())
                 continue
             elif self.iden_a == "-2":
@@ -126,16 +146,18 @@ class GestorItemes:
                 resp_user = input("n°: ")
                 while True:
                     if resp_user == "-1":
+                        print()
                         break
                     if resp_user.isdigit():
                         if int(resp_user) in range(len(self.itemes)):
                             self.itemes.pop(int(resp_user))
-                            self.i -= 1
-                        break
+                            print()
+                            break
+                        else:
+                            print("ERROR! vuelva a ingresarlo")
+                            resp_user = input("n°: ")
                     else:
-                        print("ERROR! vuelva a ingresarlo")
-                        resp_user = input("n°: ")
-                
+                        print("Error, vuelva a intentarlo")                
                 continue
 
             print()
@@ -144,32 +166,33 @@ class GestorItemes:
             self.itemes.append(item)
 
             print(self.msg_creacion_item_exito(self.i))
-            self.i += 1
 
         if mode == 0:
             print("Indique el nombre del archivo a guardar:")
             resp_user = input(">> ")
 
             with open('{}.pickle'.format(resp_user), 'wb') as f:
-                pickle.dump(itemes, f, pickle.HIGHEST_PROTOCOL)
+                pickle.dump(self.itemes, f, pickle.HIGHEST_PROTOCOL)
 
             print()
             print("Archivo creado con éxito")
 
         elif mode == 1:
             with open('{}'.format(self.path_archivo), 'wb') as f:
-                pickle.dump(itemes, f, pickle.HIGHEST_PROTOCOL)
+                pickle.dump(self.itemes, f, pickle.HIGHEST_PROTOCOL)
 
-            print("Archivo {} modificado con éxito")
+            print("Archivo {} modificado con éxito".format(self.path_archivo))
 
-    def iniciar_programa(self):
-        print(self.msg_mensaje_inicial())
+    def iniciar_programa(self):      
         resp_user = self.indicacion_opciones_iniciales()
+        print()
         if resp_user == 1:
-            self.generar_archivo()
-        elif resp_user == 2:
-            self.path_archivo = elegir_archivo()
-            self.modificar_archivo(self.path_archivo)
+                self.generar_archivo()
+            elif resp_user == 2:
+                self.path_archivo = elegir_archivo()
+                print()
+                self.modificar_archivo(self.path_archivo)
+            
     
 
 if __name__ == "__main__":

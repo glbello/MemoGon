@@ -39,7 +39,7 @@ class Item:
         self.veces_acertadas = 0
 
     def __repr__(self):
-        _repr = "iden_a: {}, iden_b: {}".format(self.iden_a, self.iden_b)
+        _repr = "{} --> {}".format(self.iden_a, self.iden_b)
         return _repr
 
 if __name__ == "__main__":

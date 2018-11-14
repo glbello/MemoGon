@@ -1,18 +1,42 @@
 from definicion_item import Item
 from random import choice, shuffle
 import pickle
+from os import listdir
 
 class Sistema:
     def __init__(self):
-        self.banco_itemes = []
-        self.n = 3
+        self.list_itemes = []
+        self.cantidad_a_mostrar = 2
+
+    def elegir_archivo(self):
+	list_archivos = [archivo for archivo in listdir() if ".pickle" in archivo]
+	for i, archivo in zip(range(len(list_archivos)), list_archivos):
+		print("{}) {}".format(i, archivo.rstrip(".pickle")))
+
+	print()	
+	resp_user = input("Elija archivo: ")
+	return list_archivos[int(resp_user)]
+
 
     def cargar_datos(self, path):
     	with open('data.pickle', 'rb') as f:
-    		self.banco_itemes = pickle.load(f)
+    		self.list_itemes = pickle.load(f)
 
     def iniciar_sistema(self):
-        shuffle(self.banco_itemes)
+    	print("-"*10 + " MemoGon " + "-"*10)
+    	print()
+    	print("A continuación seleccione el archivo que desea trabajar:")
+    	
+    	path_archivo = self.elegir_archivo()
+
+    	with open('{}'.format(path_archivo), 'rb') as f:
+            self.list_itemes = pickle.load(f)
+
+
+
+
+
+
         item = self.obtener_item(self.n)
         while item:
             self.mostrar_item(item)
@@ -43,18 +67,32 @@ class Sistema:
                 else:
                     print("Malo, vuelve a interntarlo")
 
-    def obtener_item(self, n):
-        item = min(self.banco_itemes, key= lambda item:item.veces_acertadas)
-        if item.veces_acertadas == n:
-            return False
-        return item
+    def item_a_preguntar(self):
+
+        
 
 
 if __name__ == "__main__":
-    item_a = Item("raiz de 2", str(1.414))
-    item_b = Item("raiz de 3", str(1.732))
-    sist = Sistema()
-    sist.banco_itemes.append(item_a)
-    sist.banco_itemes.append(item_b)
-    sist.iniciar_sistema()
+	pass
+	class box:
+		def __init__(self, number):
+			self.number = number
+		def __repr__(self):
+			return str(self.number)
+
+	a = box(0)
+	b = box(1)
+	c = box(2)
+	d = box(3)
+	e = box(4)
+	f = box(5)
+	_list = [a,b,c,d,e,f]
+	l = choice([i for i in _list if i.number > 9])
+	print(l)
+    # item_a = Item("raiz de 2", str(1.414))
+    # item_b = Item("raiz de 3", str(1.732))
+    # sist = Sistema()
+    # sist.list_itemes.append(item_a)
+    # sist.list_itemes.append(item_b)
+    # sist.iniciar_sistema()
 

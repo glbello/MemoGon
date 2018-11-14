@@ -27,6 +27,12 @@ class Item:
     def acierta(self):
         self.veces_acertadas += 1
 
+    def preguntar_iden_b(self, resp_user):
+    	if resp_user != self.iden_b:
+    		return False
+    	else:
+    		return True
+
     @property
     def tasa_aciertos(self):
         if self.veces_mostradas != 0:

@@ -15,7 +15,19 @@ if __name__ == "__main__":
 	# list_archivos = (archivo for archivo in listdir() if ".pickle" in archivo)
 	# print(len(list_archivos))
 	# print(list_archivos)
-	pass
+	class box:
+		def __init__(self, valor):
+			self.valor = valor
+
+	a = box(1)
+	b = box(3)
+	c = box(5)
+	d = box(2)
+	e = box(6)
+	f = box(9)
+	
+
+
 
 
 

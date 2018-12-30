@@ -72,3 +72,4 @@ class Sistema:
 if __name__ == "__main__":
     s = Sistema()
     s.iniciar_sistema()
+# mensaje de prueba

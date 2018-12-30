@@ -19,12 +19,24 @@ if __name__ == "__main__":
 		def __init__(self, valor):
 			self.valor = valor
 
+		def __repr__(self):
+			return str(self.valor)
+
 	a = box(1)
 	b = box(3)
 	c = box(5)
 	d = box(2)
 	e = box(6)
 	f = box(9)
+
+	l = [a, b, c, d, e, f]
+
+	ll = max(l, key=lambda x : x.valor)
+	print(ll)
+	# ll = [i for i in l if i.valor > 4]
+	# print(ll)
+
+
 	
 
 

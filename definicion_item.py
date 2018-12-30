@@ -49,14 +49,24 @@ class Item:
         return _repr
 
 if __name__ == "__main__":
-    resp_user = input("n°: ")
-    while True:
-        if resp_user == "-1":
-            break
-        if resp_user.isdigit():
-            if int(resp_user) > 10:
-                break
-        else:
-            print("ERROR! vuelva a ingresarlo")
-            resp_user = input("n°: ")
-    print("Terminamos")
+    # resp_user = input("n°: ")
+    # while True:
+    #     if resp_user == "-1":
+    #         break
+    #     if resp_user.isdigit():
+    #         if int(resp_user) > 10:
+    #             break
+    #     else:
+    #         print("ERROR! vuelva a ingresarlo")
+    #         resp_user = input("n°: ")
+    # print("Terminamos")
+
+    class box:
+    	def __init__(self, valor):
+
+    		self.valor = valor
+
+    	def __get__(self):
+    		print("me tomaron")
+    		self.valor -= 1
+

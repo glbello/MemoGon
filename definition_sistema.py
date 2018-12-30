@@ -13,10 +13,13 @@ class Sistema:
         for i, archivo in zip(range(len(list_archivos)), list_archivos):
             print("{}) {}".format(i, archivo.rstrip(".pickle")))
 
-        print() 
-        resp_user = input("Elija archivo: ")
-        return list_archivos[int(resp_user)]
-
+        print()
+        while True: 
+            resp_user = input("Elija archivo: ")
+            try:
+                return list_archivos[int(resp_user)]
+            except (IndexError, ValueError):
+                print("ERROR vuelva a intentarlo")
 
     def cargar_datos(self, path):
         with open('data.pickle', 'rb') as f:
@@ -69,27 +72,3 @@ class Sistema:
 if __name__ == "__main__":
     s = Sistema()
     s.iniciar_sistema()
-
-    # pass
-    # class box:
-    #   def __init__(self, number):
-    #       self.number = number
-    #   def __repr__(self):
-    #       return str(self.number)
-
-    # a = box(0)
-    # b = box(1)
-    # c = box(2)
-    # d = box(3)
-    # e = box(4)
-    # f = box(5)
-    # _list = [a,b,c,d,e,f]
-    # l = choice([i for i in _list if i.number > 9])
-    # print(l)
-    # item_a = Item("raiz de 2", str(1.414))
-    # item_b = Item("raiz de 3", str(1.732))
-    # sist = Sistema()
-    # sist.list_itemes.append(item_a)
-    # sist.list_itemes.append(item_b)
-    # sist.iniciar_sistema()
-

@@ -1,4 +1,5 @@
 import datetime
+from playsound import playsound
 
 
 class Item:
@@ -13,6 +14,7 @@ class Item:
         self.fecha_creacion = datetime.datetime.now()  # fecha actual de creacion
         self.veces_mostradas = 0
         self.veces_acertadas = 0
+        self.direccion_sonido = ""
 
     def dar_iden_a(self, iden_a):
         self.iden_a = iden_a
@@ -23,6 +25,12 @@ class Item:
     def mostrar(self):
         print(self.iden_a)
         self.veces_mostradas += 1
+
+    def definir_direccion_sonido(self, nombre_archivo):
+        self.direccion_sonido = nombre_archivo
+
+    def reproducir_sonido(self):
+    	playsound(self.direccion_sonido)
 
     def acierta(self):
         self.veces_acertadas += 1

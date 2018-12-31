@@ -1,6 +1,7 @@
 from definicion_item import Item
 from funcion_mostrar_archivos import elegir_archivo
 import pickle
+import os
 
 
 class GestorItemes:
@@ -155,6 +156,17 @@ class GestorItemes:
             print()
 
             item = self.crear_item(self.iden_a, self.iden_b)
+
+            print("Asegurese de tener los archivos de audio en la carpeta 'ingrese audio aqui'")
+            print("Cuando esté listo presione enter")
+            input(">> ")
+
+            for i, j in zip(os.listdir("ingrese audio aqui/"), range(len(os.listdir("ingrese audio aqui/")))):
+                os.rename("ingrese audio aqui/{}".format(i), "data_audio/{}{}.wav".format(self.iden_a, j))
+                item.agregar_sonido("data_audio/{}{}.wav".format(self.iden_a, j))
+            print("archivos de sonido ingresados correctamente")
+
+
             self.itemes.append(item)
 
             print(self.msg_creacion_item_exito(self.i))

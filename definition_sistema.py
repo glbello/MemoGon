@@ -31,20 +31,20 @@ class Sistema:
         print("")
 
         while True:
-        try:
-           resp_user = input(">> ")
-            if resp_user == "":
-                return 2
-            
-            resp_user = int(resp_user)
-            
-            if resp_user <= 0:
-                print("ERROR no puede ser menor o igual a cero, vuelva a intentarlo")
-                continue
-            return resp_user
-            
-        except ValueError:
-            print("ERROR vuelva a intentarlo")
+            try:
+                resp_user = input(">> ")
+                if resp_user == "":
+                    return 2
+                
+                resp_user = int(resp_user)
+                
+                if resp_user <= 0:
+                    print("ERROR no puede ser menor o igual a cero, vuelva a intentarlo")
+                    continue
+                return resp_user
+                
+            except ValueError:
+                print("ERROR vuelva a intentarlo")
 
     def iniciar_sistema(self):
         print("-"*10 + " MemoGon " + "-"*10)
@@ -59,7 +59,7 @@ class Sistema:
 
 
         cant_i_menor_mostrada = 0 #numero random >0
-        print("Si desea escuchar nuevamente el audio ingrese '1'")
+        print("Si desea escuchar nuevamente el audio ingrese '1'\n")
         while self.cantidad_a_mostrar > cant_i_menor_mostrada:
 
             item_menor_cantidad_mostrada = min(self.list_itemes, key=lambda x: x.veces_mostradas)
@@ -79,28 +79,30 @@ class Sistema:
                 item.reproducir_sonido()
 
             if resp_user == item.iden_b:
-                print("Correcto!")
+                print("Correcto!\n")
             else:
                 print("Incorrecto, la respuesta correcta era:")
                 print(item.iden_b)
                 i = self.cantidad_a_mostrar
-                print("Ahora deberas volver a escribirlo {} mas".format(i))
+                print("Ahora deberas volver a escribirlo {} mas\n".format(i))
                 while True:
                     while True:
+                        print(item.iden_b)
+                        print()
                         resp_user = input(">> ")
                         resp_user = resp_user.strip()
                         if resp_user != '1':
                             break
                         item.reproducir_sonido()
-                        
+
                     if resp_user == item.iden_b:
                         i -= 1
-                        print("Correcto!")
+                        print("Correcto!\n")
                         if i == 0:
                             break
                         print("Ya te quedan {} veces más".format(i))
                     else:
-                        print("Mal vuelve a interntarlo")
+                        print("Mal vuelve a interntarlo\n")
 
         print("Fin del programa")
                 

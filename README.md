@@ -33,6 +33,18 @@ from os import listdir
 lista_archivos = listdir()
 ```
 
+### Ver archivos de carpeta local
+
+Para reproducir sonidos, usar `playsound` (solo formatos wav)
+
+```python
+import playsound
+
+playsound.playsound("musica.wav")
+```
+Si intenta con mp3 saldrá error de iniciar MCI.
+
+
 ### Bibliografía
 
 [pickle](https://docs.python.org/3.4/library/pickle.html) - 12.1.8 Examples

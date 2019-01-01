@@ -117,7 +117,9 @@ class GestorItemes:
                         break
                     if resp_user.isdigit():
                         if int(resp_user) in range(len(self.itemes)):
-                            self.itemes.pop(int(resp_user))
+                            item = self.itemes.pop(int(resp_user))
+                            for nombre_archivo in item.direccion_sonido:
+                                os.remove(nombre_archivo)
                             print()
                             hubo_cambios = True
                             break

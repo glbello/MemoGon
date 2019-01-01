@@ -25,7 +25,7 @@ class GestorItemes:
 
     # Definicion funciones
     def msg_mensaje_inicial(self):
-        _rep = " ---- Sistema para creación de archivo de itemes ----\n"
+        _rep = " ---- Sistema para creacion de archivo de itemes ----\n"
         return _rep
 
     def msg_indicacion_opciones_iniciales(self):
@@ -43,7 +43,7 @@ class GestorItemes:
         return _rep
 
     def msg_inicio_creacion_item(self, i):
-        _rep = "Creación del item {}".format(i)
+        _rep = "Creacion del item {}".format(i)
         return _rep
 
     def mostrar_lista_itemes(self):
@@ -65,7 +65,7 @@ class GestorItemes:
         return item
 
     def msg_creacion_item_exito(self, i):
-        _rep = "item {} creado con éxito\n".format(i)
+        _rep = "item {} creado con exito\n".format(i)
         _rep += "-" * 20 + "\n"
         return _rep
 
@@ -166,7 +166,7 @@ class GestorItemes:
                     pickle.dump(self.itemes, f, pickle.HIGHEST_PROTOCOL)
 
                 print()
-                print("Archivo creado con éxito")
+                print("Archivo creado con exito")
             else:
                 print("No se hizo nada, que desperdicio de tiempo :v")
 
@@ -175,7 +175,7 @@ class GestorItemes:
                 with open('{}'.format(self.path_archivo), 'wb') as f:
                     pickle.dump(self.itemes, f, pickle.HIGHEST_PROTOCOL)
 
-                print("Archivo {} modificado con éxito".format(self.path_archivo))
+                print("Archivo {} modificado con exito".format(self.path_archivo))
             else:
                 print("No se hicieron cambios")
 

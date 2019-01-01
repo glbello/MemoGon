@@ -2,6 +2,10 @@ from definicion_item import Item
 from random import choice, shuffle
 import pickle
 from os import listdir
+from destacar_palabra import destacar
+
+
+PATH_CARPETA_PICKLES = "data_pickle"
 
 
 class Sistema:
@@ -11,26 +15,23 @@ class Sistema:
         self.cantidad_a_mostrar = 2
 
     def elegir_archivo(self):
-        list_archivos = [archivo for archivo in listdir()
+        list_archivos = [archivo for archivo in listdir("data_pickle")
                          if ".pickle" in archivo]
         for i, archivo in zip(range(len(list_archivos)), list_archivos):
             print("{}) {}".format(i, archivo.rstrip(".pickle")))
 
         print()
+
         while True:
             resp_user = input("Elija archivo: ")
             try:
-                return list_archivos[int(resp_user)]
+                return "{}/{}".format(PATH_CARPETA_PICKLES, list_archivos[int(resp_user)])
             except (IndexError, ValueError):
                 print("ERROR vuelva a intentarlo")
 
-    def cargar_datos(self, path):
-        with open('data.pickle', 'rb') as f:
-            self.list_itemes = pickle.load(f)
-
     def indicar_cant_veces_mostrar(self):
         print("Indique la cantidad de veces que desea que se muestre las palabras:")
-        print("(Por defecto: 2")
+        print("(Por defecto: 2)")
         print("")
 
         while True:
@@ -53,9 +54,10 @@ class Sistema:
     def iniciar_sistema(self):
         print("-" * 10 + " MemoGon " + "-" * 10)
         print()
-        print("A continuación seleccione el archivo que desea trabajar:")
+        print("A continuacion seleccione el archivo que desea trabajar:")
 
         path_archivo = self.elegir_archivo()
+        print()
 
         with open('{}'.format(path_archivo), 'rb') as f:
             self.list_itemes = pickle.load(f)
@@ -76,7 +78,7 @@ class Sistema:
 
             while True:
                 resp_user = input(">> ")
-                resp_user = resp_user.strip()
+                resp_user = resp_user.strip().lower()
                 if resp_user != '1':
                     break
                 item.reproducir_sonido()
@@ -85,15 +87,15 @@ class Sistema:
                 print("Correcto!\n")
             else:
                 print("Incorrecto, la respuesta correcta era:")
-                print(item.iden_a)
+                print()
+                print(destacar(item.iden_a))
+                print()
                 i = self.cantidad_a_mostrar
                 print("Ahora deberas volver a escribirlo {} mas\n".format(i))
                 while True:
                     while True:
-                        print(item.iden_a)
-                        print()
                         resp_user = input(">> ")
-                        resp_user = resp_user.strip()
+                        resp_user = resp_user.strip().lower()
                         if resp_user != '1':
                             break
                         item.reproducir_sonido()
@@ -103,11 +105,11 @@ class Sistema:
                         print("Correcto!\n")
                         if i == 0:
                             break
-                        print("Ya te quedan {} veces más".format(i))
+                        print("Ya te quedan {} veces mas".format(i))
                     else:
                         print("Mal vuelve a interntarlo\n")
 
-                print("Ahora escribe su definicion")
+            print("Ahora escribe su traduccion a español")
 
             while True:
                 resp_user = input(">> ")
@@ -120,15 +122,14 @@ class Sistema:
                 print("Correcto!\n")
             else:
                 print("Incorrecto, la respuesta correcta era:")
-                print(item.iden_b)
+                print(destacar(item.iden_b))
+                print()
                 i = self.cantidad_a_mostrar
                 print("Ahora deberas volver a escribirlo {} mas\n".format(i))
                 while True:
                     while True:
-                        print(item.iden_b)
-                        print()
                         resp_user = input(">> ")
-                        resp_user = resp_user.strip()
+                        resp_user = resp_user.strip().lower()
                         if resp_user != '1':
                             break
                         item.reproducir_sonido()
@@ -138,7 +139,7 @@ class Sistema:
                         print("Correcto!\n")
                         if i == 0:
                             break
-                        print("Ya te quedan {} veces más".format(i))
+                        print("Ya te quedan {} veces mas".format(i))
                     else:
                         print("Mal vuelve a interntarlo\n")
 

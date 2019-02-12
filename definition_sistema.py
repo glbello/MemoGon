@@ -86,6 +86,7 @@ class Sistema:
             else:
                 print("Incorrecto, la respuesta correcta era:")
                 print(item.iden_a)
+                item.reproducir_sonido()
                 i = self.cantidad_a_mostrar
                 print("Ahora deberas volver a escribirlo {} mas\n".format(i))
                 while True:
@@ -94,6 +95,7 @@ class Sistema:
                         print()
                         resp_user = input(">> ")
                         resp_user = resp_user.strip()
+                        item.reproducir_sonido()
                         if resp_user != '1':
                             break
                         item.reproducir_sonido()
@@ -106,8 +108,9 @@ class Sistema:
                         print("Ya te quedan {} veces más".format(i))
                     else:
                         print("Mal vuelve a interntarlo\n")
+                        item.reproducir_sonido()
 
-                print("Ahora escribe su definicion")
+                print("Ahora escribe su traduccion al espanol")
 
             while True:
                 resp_user = input(">> ")
